@@ -1,0 +1,6 @@
+node_modules/*
+build/contracts/*
+coverage/*
+contracts/artifacts/*
+.deps/*
+.DS_Store

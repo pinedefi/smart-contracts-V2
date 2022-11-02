@@ -1,0 +1,45 @@
+name: CI
+on:
+  push:
+    branches: ['**']
+jobs:
+  build:
+    name: Build/Test
+    runs-on: ubuntu-latest
+    container: node:16.3.0
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: 'recursive'
+          token: ${{ secrets.GH_ACCESS_TOKEN }}
+      - name: Cache Node modules
+        uses: actions/cache@v2
+        env:
+          CACHE_NAME: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.CACHE_NAME }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.CACHE_NAME }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Install Node modules
+        run: npm install -g truffle
+      - name: Install Openzeppelin 1
+        run: npm install --save @openzeppelin/contracts
+      - name: Install Openzeppelin 2
+        run: npm install --save @openzeppelin/contracts-upgradeable
+      - name: Test
+        run: truffle test
+  notify:
+    name: Notify
+    needs: [build]
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: andrewscwei/slack-action@v1.0.0
+        with:
+          success-prefix: 🌲
+          success: ${{ needs.build.result == 'success' }}
+          webhook-url: ${{ secrets.SLACK_DEVOPS_WEBHOOK_URL }}

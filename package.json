@@ -1,0 +1,14 @@
+{   "scripts": {
+    "test": "truffle test",
+    "compile": "truffle compile"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.3.2",
+    "@openzeppelin/contracts-upgradeable": "^4.4.1",
+    "generate-contract-interface": "^0.1.13"
+  },
+  "devDependencies": {
+    "solidity-coverage": "^0.7.17",
+    "truffle": "^5.4.12"
+  }
+}
