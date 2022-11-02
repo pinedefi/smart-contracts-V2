@@ -1,6 +1,9 @@
-# lending-contract [![CI](https://github.com/pineprotocol/lending-borrowing-smart-contracts/workflows/CI/badge.svg)](https://github.com/pineprotocol/lending-borrowing-smart-contracts/actions/workflows/ci.yml)
+# smart contracts v2 [![CI](https://github.com/pinedefi/smart-contracts-V2/workflows/CI/badge.svg)](https://github.com/pinedefi/smart-contracts-V2/actions/workflows/ci.yml)
+Contains all smart contracts including lending pool, PNPL, rollover etc.
+
 
 ## Usage
+Created in Truffle
 
 ```sh
 $ npm install
